@@ -1,6 +1,6 @@
 #sync rom
 repo init --depth=1 --no-repo-verify -u https://github.com/xdroid-oss/xd_manifest -b thirteen -g default,-mips,-darwin,-notdefault
-git clone https://github.com/c3eru/local_manifest --depth 1 -b test .repo/local_manifests
+git clone https://github.com/c3eru/local_manifest --depth 1 -b anuu .repo/local_manifests
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
 
 # build rom
