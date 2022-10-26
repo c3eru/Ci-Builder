@@ -1,0 +1,38 @@
+env:
+  RCLONECONFIG_DRIVE: "ENCRYPTED[22e55e12c89b2caac343510dfc5079d85c783f0281c4500e90bf84d313677bc695ccfb1fcd5f2bfd00780fbafd96ad77]"
+  TG_TOKEN: "ENCRYPTED[e9615ae83bea6ebb92c993ba07c369e393556c4b3c163c59ee87fadd433a452e61923518d444154d482d1d1bd0c35ef0]"
+  TG_CHAT_ID: "ENCRYPTED[e82a0f0f0579e90a30bd82f6397f169f7beb34f77c7c36ef45dbf561b45435e589c6a0275a8e1afc46186339f740fbef]"
+  WORKDIR: "/tmp"
+  EMAIL: "ENCRYPTED[2d6794887d9eec1bffaee35efb504f16062d41fc7e7bb88202190b803d038d3cb6a873692811320b19fcacc7adf22b56]"
+  CIRRUS_CLONE_DEPTH: "1"
+  credentials: "ENCRYPTED[fbe5d7b039289f51be4c28095130722f48d5249d0feed71085e9b131f4c97021bc36a11da8ac3398bfecac0056ca452d]"
+
+task:
+  name: "Setting Up, Syncing, Building and Uploading"
+  only_if: $CIRRUS_REPO_OWNER == 'c3eru'
+  timeout_in: 120m
+  container:
+    image: anggit86/ubuntu:22.04
+    cpu: 8
+    memory: 32G
+
+  Load-Ccache_background_script:
+     - ./script/load_ccache.sh
+
+  Sync-rom_script:
+     - git config --global user.name "c3eru"
+     - git config --global user.email "yyprjkt@gmail.com"
+     - echo "$credentials" > ~/.git-credentials
+     - git config --global credential.helper store --file=~/.git-credentials
+     - ./script/sync.sh
+     
+  Build-rom_script:
+     - ./script/building.sh
+     
+  Ccache-info_script:
+     - set -e
+     - export CCACHE_DIR=$WORKDIR/ccache
+     - ccache -s
+
+  Upload-build_script:
+     - ./script/ziping.sh
