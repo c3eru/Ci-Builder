@@ -1,5 +1,5 @@
 #sync rom
-repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
+repo init --depth=1 --no-repo-verify -u https://github.com/ForkLineageOS/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
 git clone https://github.com/c3eru/local_manifest --depth 1 -b Loskibos .repo/local_manifests
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
 
@@ -14,4 +14,4 @@ export BUILD_HOSTNAME=builder-ci-task-kang-moment
 make bacon -j8
 # end 
 
-# build 3
+# build 4
