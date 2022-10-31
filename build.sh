@@ -4,7 +4,7 @@ repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync 
 
 git clone --depth=1 https://github.com/c3eru/dtchime -b lineage-19.1 device/xiaomi/chime
 git clone --depth=1 https://github.com/frstprjkt/vendor_xiaomi_chime -b twelve vendor/xiaomi/chime
-git clone --depth=1 https://github.com/c3eru/kernel_xiaomi_citrus_sm6115 -b rvc kernel/xiaomi/chime
+git clone --depth=1 https://github.com/greenforce-project/kernel_xiaomi_citrus_sm6115 -b rvc kernel/xiaomi/chime
 git clone --depth=1 https://github.com/kdrag0n/proton-clang -b master prebuilts/clang/host/linux-x86/clang-proton
 
 # build rom
