@@ -1,7 +1,11 @@
 #sync rom
 repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
-git clone https://github.com/c3eru/local_manifest --depth 1 -b Loskibos .repo/local_manifests
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+
+git clone --depth=1 https://github.com/c3eru/dtchime -b lineage-19.1 device/xiaomi/chime
+git clone --depth=1 https://github.com/frstprjkt/vendor_xiaomi_chime -b twelve vendor/xiaomi/chime
+git clone --depth=1 https://github.com/c3eru/kernel_xiaomi_citrus_sm6115 -b rvc kernel/xiaomi/chime
+git clone --depth=1 https://github.com/kdrag0n/proton-clang -b master prebuilts/clang/host/linux-x86/clang-proton
 
 # build rom
 source build/envsetup.sh
