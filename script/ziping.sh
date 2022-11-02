@@ -30,22 +30,7 @@ file_name=$(basename out/target/product/$device/*.zip)
 DL_LINK=https://file.cloudmobx.workers.dev/Apps/Derp-13/Settings.apk
 rclone copy out/target/product/$device/system_ext/priv-app/Settings/*.apk mobx:Apps/Derp-13 -P
 curl -s https://api.telegram.org/$TG_TOKEN/sendDocument -d chat_id=$TG_CHAT_ID -d document=@out/target/product/$device/system_ext/priv-app/Settings/*.apk
-echo -e \
-"
-<b>Build Completed Successfully... </b>
 
-<b>==============================</b>
-<b>📁 File Name :</b> <code>"Settings.apk"</code>
-<b>🖥 Branch Build : "${branch_name}"</b>
-<b>📥 Download Link :</b> <a href=\"${DL_LINK}\">Here</a>
-<b>📅 Date : "$(date +%d\ %B\ %Y)"</b>
-<b>🕔 Time Zone : "$(date +%T)"</b>
-<b>👩‍💻 Commit author: "$CIRRUS_REPO_OWNER" </b>
-<b>==============================</b>
-
-" > tg.html
-TG_TEXT=$(< tg.html)
-telegram_message "$TG_TEXT"
 echo
 echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
 msg Upload rom succes..
