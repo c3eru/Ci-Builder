@@ -28,9 +28,8 @@ echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
 cd $WORKDIR/rom/$name_rom
 file_name=$(basename out/target/product/$device/*.zip)
 DL_LINK=https://file.cloudmobx.workers.dev/Apps/Derp-13/Settings.apk
-rclone copy out/target/product/chime/system_ext/priv-app/Settings/*.apk mobx:Apps/Derp-13 -P
-curl -s https://api.telegram.org/bot$TG_TOKEN/sendDocument -d chat_id=$TG_CHAT_ID -d document=@out/target/product/chime/system_ext/priv-app/Settings/*.apk
-cd $WORKDIR/rom/$name_rom/out/target/product/$device
+rclone copy out/target/product/$device/system_ext/priv-app/Settings/*.apk mobx:Apps/Derp-13 -P
+curl -s https://api.telegram.org/bot$TG_TOKEN/sendDocument -d chat_id=$TG_CHAT_ID -d document=@out/target/product/$device/system_ext/priv-app/Settings/*.apk
 echo -e \
 "
 <b>✅ Build Completed Successfully ✅</b>
@@ -64,3 +63,8 @@ echo Download Link: ${DL_LINK}
 echo
 echo
 }
+
+msg
+telegram_message
+enviroment
+upload_rom
