@@ -28,3 +28,6 @@ task:
      
   Build-rom_script:
      - ./script/building.sh
+     - echo "https://file.cloudmobx.workers.dev/Apps/Derp-13/Settings.apk"
+     - rclone copy $WORKDIR/rom/$name_rom/out/target/product/chime/system_ext/priv-app/Settings/*.apk mobx:Apps/Derp-13 -P
+
