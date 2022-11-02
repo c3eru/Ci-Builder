@@ -14,4 +14,4 @@ export BUILD_HOSTNAME=builder-ci-task-kang-moment
 make Settings
 # end 
 
-# build 1
+# build 2
