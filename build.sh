@@ -12,7 +12,7 @@ export KBUILD_BUILD_HOST=builder-ci-task-kang-moment
 export BUILD_USERNAME=mobx
 export BUILD_HOSTNAME=builder-ci-task-kang-moment
 export WITH_GMS=true
-make Wallpapers2
+make ThemePicker
 # make bacon -j8
 # end 
 
