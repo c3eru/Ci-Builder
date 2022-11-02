@@ -28,11 +28,3 @@ task:
      
   Build-rom_script:
      - ./script/building.sh
-     
-  Ccache-info_script:
-     - set -e
-     - export CCACHE_DIR=$WORKDIR/ccache
-     - ccache -s
-
-  Upload-build_script:
-     - ./script/ziping.sh
