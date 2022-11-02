@@ -11,9 +11,7 @@ export KBUILD_BUILD_USER=mobx
 export KBUILD_BUILD_HOST=builder-ci-task-kang-moment
 export BUILD_USERNAME=mobx
 export BUILD_HOSTNAME=builder-ci-task-kang-moment
-export WITH_GMS=true
 make Settings
-# make bacon -j8
 # end 
 
 # build 1

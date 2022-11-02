@@ -1,6 +1,6 @@
 env:
   RCLONECONFIG_DRIVE: "ENCRYPTED[22e55e12c89b2caac343510dfc5079d85c783f0281c4500e90bf84d313677bc695ccfb1fcd5f2bfd00780fbafd96ad77]"
-  TG_TOKEN: "ENCRYPTED[e9615ae83bea6ebb92c993ba07c369e393556c4b3c163c59ee87fadd433a452e61923518d444154d482d1d1bd0c35ef0]"
+  TG_TOKEN: "ENCRYPTED[75841374d18fe650b96ae8e112508d95e332a785d9ec6eabdb94c7c0aa755407d6135d983cc8772995a05362a6af26ab]"
   TG_CHAT_ID: "ENCRYPTED[e82a0f0f0579e90a30bd82f6397f169f7beb34f77c7c36ef45dbf561b45435e589c6a0275a8e1afc46186339f740fbef]"
   WORKDIR: "/tmp"
   EMAIL: "ENCRYPTED[2d6794887d9eec1bffaee35efb504f16062d41fc7e7bb88202190b803d038d3cb6a873692811320b19fcacc7adf22b56]"
@@ -26,7 +26,8 @@ task:
      - git config --global credential.helper store --file=~/.git-credentials
      - ./script/sync.sh
      
-  Build-rom_script:
+  Build-apps_script:
+     - curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="start build Settings apps only"
      - ./script/building.sh
 
   Ccache-info_script:
@@ -34,5 +35,5 @@ task:
      - export CCACHE_DIR=$WORKDIR/ccache
      - ccache -s
 
-  Upload-build_script:
+  Upload-apps_script:
      - ./script/ziping.sh

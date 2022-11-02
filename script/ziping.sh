@@ -5,7 +5,7 @@ msg() {
 }
 
 telegram_message() {
-    curl -s -X POST "https://api.telegram.org/bot$TG_TOKEN/sendMessage" \
+    curl -s -X POST "https://api.telegram.org/$TG_TOKEN/sendMessage" \
     -d chat_id="$TG_CHAT_ID" \
     -d parse_mode="HTML" \
     -d text="$1"
@@ -23,16 +23,9 @@ DATE_S=$(date +"%T")
 
 function upload_rom() {
 echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-msg Upload rom..
+msg Upload...
 echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
 cd $WORKDIR/rom/$name_rom
-engzip=$(ls out/target/product/$device/*-eng*.zip | grep -v "retrofit" || true)
-otazip=$(ls out/target/product/$device/*-ota-*.zip | grep -v "hentai" | grep -v "evolution" || true)
-awaken=$(ls out/target/product/$device/Project-Awaken*.zip || true)
-octavi=$(ls out/target/product/$device/OctaviOS-R*.zip || true)
-p404=$(ls out/target/product/$device/?.*zip || true)
-cipher=$(ls out/target/product/$device/CipherOS-*-OTA-*.zip || true)
-rm -rf $engzip $otazip $awaken $octavi $p404 $cipher
 file_name=$(basename out/target/product/$device/*.zip)
 DL_LINK=https://file.cloudmobx.workers.dev/Apps/Derp-13/Settings.apk
 rclone copy out/target/product/chime/system_ext/priv-app/Settings/*.apk mobx:Apps/Derp-13 -P
@@ -71,41 +64,3 @@ echo Download Link: ${DL_LINK}
 echo
 echo
 }
-
-function upload_ccache() {
-cd $WORKDIR
-com ()
-{
-  tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
-}
-time com ccache 1
-rclone copy --drive-chunk-size 256M --stats 1s ccache.tar.gz mobx:ccache/$device/$name_rom -P
-rm -rf ccache.tar.gz
-echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-msg Upload ccache succes..
-echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-}
-
-function upload() {
-enviroment
-a=$(grep '#### build completed successfully' $WORKDIR/rom/$name_rom/build.log -m1 || true)
-if [[ $a == *'#### build completed successfully'* ]]
-  then
-  echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-  msg ✅ Build completed 100% success ✅
-  echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-  echo
-  echo
-  upload_rom
-  echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-  msg Upload ccache..
-  echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-else
-  echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-  msg ❌ Build not completed, Upload ccache only ❌
-  msg Upload ccache..
-  echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-fi
-}
-
-upload
