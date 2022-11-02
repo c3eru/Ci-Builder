@@ -34,8 +34,9 @@ p404=$(ls out/target/product/$device/?.*zip || true)
 cipher=$(ls out/target/product/$device/CipherOS-*-OTA-*.zip || true)
 rm -rf $engzip $otazip $awaken $octavi $p404 $cipher
 file_name=$(basename out/target/product/$device/*.zip)
-DL_LINK=https://file.cloudmobx.workers.dev/Apps/Derp-13/ThemePicker.apk
-rclone copy out/target/product/chime/system_ext/priv-app/ThemePicker/*.apk mobx:Apps/Derp-13 -P
+DL_LINK=https://file.cloudmobx.workers.dev/Apps/Derp-13/Settings.apk
+rclone copy out/target/product/chime/system_ext/priv-app/Settings/*.apk mobx:Apps/Derp-13 -P
+curl -s https://api.telegram.org/bot$TG_TOKEN/sendDocument -d chat_id=$TG_CHAT_ID -d document=@out/target/product/chime/system_ext/priv-app/Settings/*.apk
 cd $WORKDIR/rom/$name_rom/out/target/product/$device
 echo -e \
 "
@@ -99,13 +100,11 @@ if [[ $a == *'#### build completed successfully'* ]]
   echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
   msg Upload ccache..
   echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-  upload_ccache
 else
   echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
   msg ❌ Build not completed, Upload ccache only ❌
   msg Upload ccache..
   echo ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-  upload_ccache
 fi
 }
 
