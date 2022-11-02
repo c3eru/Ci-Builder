@@ -40,9 +40,9 @@ echo -e \
 <b>📥 Download Link :</b> <a href=\"${DL_LINK}\">Here</a>
 <b>📅 Date : "$(date +%d\ %B\ %Y)"</b>
 <b>🕔 Time Zone : "$(date +%T)"</b>
+<b>👩‍💻 Commit author: "$CIRRUS_REPO_OWNER" </b>
 ==============================
-
-<b>🙇 By : "$CIRRUS_REPO_OWNER"</b>
+Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
 " > tg.html
 TG_TEXT=$(< tg.html)
 telegram_message "$TG_TEXT"
