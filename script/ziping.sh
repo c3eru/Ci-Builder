@@ -29,26 +29,18 @@ cd $WORKDIR/rom/$name_rom
 file_name=$(basename out/target/product/$device/*.zip)
 DL_LINK=https://file.cloudmobx.workers.dev/Apps/Derp-13/Settings.apk
 rclone copy out/target/product/$device/system_ext/priv-app/Settings/*.apk mobx:Apps/Derp-13 -P
-curl -s https://api.telegram.org/bot$TG_TOKEN/sendDocument -d chat_id=$TG_CHAT_ID -d document=@out/target/product/$device/system_ext/priv-app/Settings/*.apk
+curl -s https://api.telegram.org/$TG_TOKEN/sendDocument -d chat_id=$TG_CHAT_ID -d document=@out/target/product/$device/system_ext/priv-app/Settings/*.apk
 echo -e \
 "
-<b>✅ Build Completed Successfully ✅</b>
+<b>Build Completed Successfully...</b>
 
-━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
-<b>🚀 Rom Name :- ${name_rom}</b>
-<b>📁 File Name :-</b> <code>"${file_name}"</code>
-<b>⏰ Timer Build :- "$(grep "#### build completed successfully" $WORKDIR/rom/$name_rom/build.log -m 1 | cut -d '(' -f 2)"</b>
-<b>📱 Device :- "${device}"</b>
-<b>📂 Size :- "$(ls -lh *zip | cut -d ' ' -f5)"</b>
-<b>🖥 Branch Build :- "${branch_name}"</b>
-<b>📥 Download Link :-</b> <a href=\"${DL_LINK}\">Here</a>
-<b>📅 Date :- "$(date +%d\ %B\ %Y)"</b>
-<b>🕔 Time Zone :- "$(date +%T)"</b>
-
-
-<b>📕 MD5 :-</b> <code>"$(md5sum *zip | cut -d' ' -f1)"</code>
-<b>📘 SHA1 :-</b> <code>"$(sha1sum *zip | cut -d' ' -f1)"</code>
-━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
+==============================
+<b>📁 File Name :</b> <code>"Settings.apk"</code>
+<b>🖥 Branch Build : "${branch_name}"</b>
+<b>📥 Download Link :</b> <a href=\"${DL_LINK}\">Here</a>
+<b>📅 Date : "$(date +%d\ %B\ %Y)"</b>
+<b>🕔 Time Zone : "$(date +%T)"</b>
+==============================
 
 <b>🙇 By : "$CIRRUS_REPO_OWNER"</b>
 " > tg.html
