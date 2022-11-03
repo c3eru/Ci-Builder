@@ -109,4 +109,8 @@ else
 fi
 }
 
+
+msg
+telegram_message
+enviroment
 upload
